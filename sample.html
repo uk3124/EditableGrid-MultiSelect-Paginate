@@ -1,0 +1,147 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Editable-Table</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/chosen.css">
+
+        <style>
+            .pagination a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+            }
+
+            .pagination a.active {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            .pagination a:hover:not(.active) { background-color: #ddd; }
+        </style>
+
+    </head>
+    <body>
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+        <table class="table datatable table-striped table-bordered table-editable" cellspacing="0" width="100%" id="example6">
+            <thead>
+            <tr>
+                <th>User ID</th>
+                <th>UserName</th>
+                <th>Email</th>
+                <th>Characters</th>
+                <th>Inputs</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1234</td>
+                <td>umar</td>
+                <td>umar@xyz.com</td>
+                <td></td>
+                <td></td>
+                <td>Inactive</td>
+            </tr>
+            <tr>
+                <td>12342</td>
+                <td>abc</td>
+                <td>test@anc.com</td>
+                <td></td>
+                <td></td>
+                <td>Active</td>
+            </tr>
+            <tr>
+                <td>12344</td>
+                <td>zxc</td>
+                <td>TEST@abc.com</td>
+                <td></td>
+                <td></td>
+                <td>Active</td>
+            </tr>
+            <tr>
+                <td>12345</td>
+                <td>zenos</td>
+                <td>hulk@123.com</td>
+                <td></td>
+                <td></td>
+                <td>Inactive</td>
+            </tr>
+            <tr>
+                <td>1234</td>
+                <td>markcell</td>
+                <td>tonystark@stark.com</td>
+                <td></td>
+                <td></td>
+                <td>Inactive</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" crossorigin="anonymous"></script>
+        <script src="js/editable-table.js"></script>
+        <script src="js/chosen.jquery.js"></script>
+        <script src="js/jquery.table.hpaging.min.js"></script>
+
+        <script>
+            $(function () {
+                $("#example6").hpaging({ "limit": 5 });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function() {
+
+
+                $('#example6').Tabledit({
+                    url: 'updatescript.php',
+                    deleteButton : false,
+                    columns: {
+                        identifier: [0, 'id'],
+                        editable: [[1, 'usrename'], [2, 'email'], [3, 'character', '{"1": "Iron Man", "2": "Hulk", "3": "Thor"}'], [4, 'input', '{"1": "Input 1", "2": "Input 2", "3": "Input 3"}'], [5, 'status']]
+                    },
+                    onDraw: function () {
+                        console.log('onDraw()');
+                    },
+                    onSuccess: function (data, textStatus, jqXHR) {
+                        console.log('onSuccess(data, textStatus, jqXHR)');
+                        console.log(data);
+                        console.log(textStatus);
+                        console.log(jqXHR);
+                    },
+                    onFail: function (jqXHR, textStatus, errorThrown) {
+                        console.log('onFail(jqXHR, textStatus, errorThrown)');
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(errorThrown);
+                    },
+                    onAlways: function () {
+                        console.log('onAlways()');
+                    },
+                    onAjax: function (action, serialize) {
+                        console.log('onAjax(action, serialize)');
+                        console.log(action);
+                        console.log(serialize);
+                    }
+                });
+                $('.html-multi-chosen-select').chosen({ width: "210px" });
+                $('.chosen-container').css('display','none');
+            });
+        </script>
+
+    </body>
+</html>
