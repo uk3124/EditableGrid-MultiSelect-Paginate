@@ -6,38 +6,21 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
     t.fn.Tabledit = function (e) {
         function n(e) {
 
-            /* Custom code - Start - Added by Umar */
-            var val=[];
-             var x = i.find(".html-multi-chosen-select").serialize().split('&').join(",");
-             console.log("x :"+x);
-            var z = i.find(".chosen-container").each(function () {
-                console.log("Z : "+z);
-                val.push(this.text);
-            });
-            console.log("Val : "+val.join(','));
-
-             /*Custom code - End - Added by Umar*/
-
             var n = i.find(".tabledit-input, .html-multi-chosen-select").serialize() + "&action=" + e, a = d.onAjax(e, n); //Edited by Umar
 
             var jsonPostData = "jsonPostData=" + encodeURIComponent(JSON.stringify(n));
-            console.log(n);
-            console.log("jsonPostData : "+jsonPostData);
             n=jsonPostData;
 
-            var dummy = "jsonPostData=" + encodeURIComponent(JSON.stringify(i.find(".tabledit-input, .html-multi-chosen-select").serialize() + "&action=" + e, a = d.onAjax(e, n)));
-            console.log("dummy :"+dummy);
-
-            if (a === !1)return !1;
+            if (a === !1) { return !1 };
             var l = t.post(d.url, n, function (t, n, a) {
                 e === d.buttons.edit.action && (s.removeClass(d.dangerClass).addClass(d.warningClass), setTimeout(function () {
-                    i.find("tr." + d.warningClass).removeClass(d.warningClass)
+                    i.find("tr." + d.warningClass).removeClass(d.warningClass);
                 }, 1400)), d.onSuccess(t, n, a)
             }, "json");
             return l.fail(function (t, n, i) {
-                e === d.buttons["delete"].action ? (o.removeClass(d.mutedClass).addClass(d.dangerClass), o.find(".tabledit-toolbar button").attr("disabled", !1), o.find(".tabledit-toolbar .tabledit-restore-button").hide()) : e === d.buttons.edit.action && s.addClass(d.dangerClass), d.onFail(t, n, i)
+                e === d.buttons["delete"].action ? (o.removeClass(d.mutedClass).addClass(d.dangerClass), o.find(".tabledit-toolbar button").attr("disabled", !1), o.find(".tabledit-toolbar .tabledit-restore-button").hide()) : e === d.buttons.edit.action && s.addClass(d.dangerClass), d.onFail(t, n, i);
             }), l.always(function () {
-                d.onAlways()
+                d.onAlways();
             }), l
         }
 
@@ -69,7 +52,7 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
                     html: '<span class="glyphicon glyphicon-trash"></span>',
                     action: "delete"
                 },
-                save: {"class": "btn btn-sm btn-success", html: "Update"},
+                save: {"class": "btn btn-sm btn-success", html: "Update"}, //Edited by Umar
                 restore: {"class": "btn btn-sm btn-warning", html: "Restore", action: "restore"},
                 confirm: {"class": "btn btn-sm btn-danger", html: "Confirm"}
             },
@@ -91,7 +74,7 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
                     e.each(function () {
                         var e = '<span class="tabledit-span tabledit-identifier">' + t(this).text() + "</span>",
                             n = '<input class="tabledit-input tabledit-identifier" type="hidden" name="' + d.columns.identifier[1] + '" value="' + t(this).text() + '" disabled>';
-                        t(this).html(e + n), t(this).parent("tr").attr(d.rowIdentifier, t(this).text())
+                        t(this).html(e + n), t(this).parent("tr").attr(d.rowIdentifier, t(this).text());
                     })
                 }, editable: function () {
                     for (var e = 0; e < d.columns.editable.length; e++) {
