@@ -11,7 +11,7 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
             var jsonPostData = "jsonPostData=" + encodeURIComponent(JSON.stringify(n));
             n=jsonPostData;
 
-            if (a === !1) { return !1 };
+            if (a === !1) { return !1; }
             var l = t.post(d.url, n, function (t, n, a) {
                 e === d.buttons.edit.action && (s.removeClass(d.dangerClass).addClass(d.warningClass), setTimeout(function () {
                     i.find("tr." + d.warningClass).removeClass(d.warningClass);
