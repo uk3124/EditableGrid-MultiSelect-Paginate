@@ -86,10 +86,10 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
                             if ("undefined" != typeof d.columns.editable[e][2]) {
                                 var a='<select class="tabledit-input html-multi-chosen-select '+d.inputClass+'" name="'+d.columns.editable[e][1]+'" style="display: none;" multiple="multiple">'; //Edited by Umar
                                 t.each(jQuery.parseJSON(d.columns.editable[e][2]), function (t, e) {
-                                    a += n === e ? '<option value="' + t + '" selected>' + e + "</option>" : '<option value="' + t + '">' + e + "</option>"
+                                    a += n === e ? '<option value="' + t + '" selected>' + e + "</option>" : '<option value="' + t + '">' + e + "</option>";
                                 }), a += "</select>"
-                            } else var a = '<input class="tabledit-input ' + d.inputClass + '" type="text" name="' + d.columns.editable[e][1] + '" value="' + t(this).text() + '" style="display: none;" disabled>';
-                            t(this).html(i + a), t(this).addClass("tabledit-view-mode")
+                            } else { var a = '<input class="tabledit-input ' + d.inputClass + '" type="text" name="' + d.columns.editable[e][1] + '" value="' + t(this).text() + '" style="display: none;" disabled>'; }
+                            t(this).html(i + a), t(this).addClass("tabledit-view-mode");
                         })
                     }
                 }, toolbar: function () {
@@ -97,7 +97,7 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
                         var t = "", e = "", n = "", a = "", s = "";
                         0 === i.find("th.tabledit-toolbar-column").length && i.find("tr:first").append('<th class="tabledit-toolbar-column"></th>'), d.editButton && (t = '<button type="button" class="tabledit-edit-button ' + d.buttons.edit["class"] + '" style="float: none;">EDIT  ' + d.buttons.edit.html + "</button>"), d.deleteButton && (e = '<button type="button" class="tabledit-delete-button ' + d.buttons["delete"]["class"] + '" style="float: none;">' + d.buttons["delete"].html + "</button>", s = '<button type="button" class="tabledit-confirm-button ' + d.buttons.confirm["class"] + '" style="display: none; float: none;">' + d.buttons.confirm.html + "</button>"), d.editButton && d.saveButton && (n = '<button type="button" class="tabledit-save-button ' + d.buttons.save["class"] + '" style="display: none; float: none;">' + d.buttons.save.html + "</button>"), d.deleteButton && d.restoreButton && (a = '<button type="button" class="tabledit-restore-button ' + d.buttons.restore["class"] + '" style="display: none; float: none;">' + d.buttons.restore.html + "</button>");
                         var o = '<div class="tabledit-toolbar ' + d.toolbarClass + '" style="text-align: left;">\n                                           <div class="' + d.groupClass + '" style="float: none;">' + t + e + "</div>\n                                           " + n + "\n                                           " + s + "\n                                           " + a + "\n                                       </div></div>";
-                        i.find("tr:gt(0)").append('<td style="white-space: nowrap; width: 1%;">' + o + "</td>")
+                        i.find("tr:gt(0)").append('<td style="white-space: nowrap; width: 1%;">' + o + "</td>");
                     }
                 }
             }
@@ -105,7 +105,7 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
             view: function (e) {
                 var n = t(e).parent("tr");
                 $('.chosen-container').css('display','none'); //Added by umar
-                t(e).parent("tr").find(".tabledit-input.tabledit-identifier").prop("disabled", !0), t(e).find(".tabledit-input").blur().hide().prop("disabled", !0), t(e).find(".tabledit-span").show(), t(e).addClass("tabledit-view-mode").removeClass("tabledit-edit-mode"), d.editButton && (n.find("button.tabledit-save-button").hide(), n.find("button.tabledit-edit-button").removeClass("active").blur())
+                t(e).parent("tr").find(".tabledit-input.tabledit-identifier").prop("disabled", !0), t(e).find(".tabledit-input").blur().hide().prop("disabled", !0), t(e).find(".tabledit-span").show(), t(e).addClass("tabledit-view-mode").removeClass("tabledit-edit-mode"), d.editButton && (n.find("button.tabledit-save-button").hide(), n.find("button.tabledit-edit-button").removeClass("active").blur());
             }, edit: function (e) {
                 c.reset(e);
                 var n = t(e).parent("tr");
@@ -113,14 +113,14 @@ if ("undefined" == typeof jQuery)throw new Error("Tabledit requires jQuery libra
                 n.find(".tabledit-input.html-multi-chosen-select").css('display','none'); //Added by umar
                 n.find(".tabledit-input.tabledit-identifier").prop("disabled", !1), t(e).find(".tabledit-span").hide();
                 var i = t(e).find(".tabledit-input");
-                i.prop("disabled", !1).show(), d.autoFocus && i.focus(), t(e).addClass("tabledit-edit-mode").removeClass("tabledit-view-mode"), d.editButton && (n.find("button.tabledit-edit-button").addClass("active"), n.find("button.tabledit-save-button").show())
+                i.prop("disabled", !1).show(), d.autoFocus && i.focus(), t(e).addClass("tabledit-edit-mode").removeClass("tabledit-view-mode"), d.editButton && (n.find("button.tabledit-edit-button").addClass("active"), n.find("button.tabledit-save-button").show());
             }
         }, b = {
             reset: function (e) {
                 t(e).each(function () {
                     var e = t(this).find(".tabledit-input"), n = t(this).find(".tabledit-span").text();
                     e.is("select") ? e.find("option").filter(function () {
-                        return t.trim(t(this).text()) === n
+                        return t.trim(t(this).text()) === n;
                     }).attr("selected", !0) : e.val(n), u.view(this)
                 })
             }, submit: function (e) {
